@@ -14,31 +14,45 @@
 
 h1 {
   font-size: 64px;
+  color: var(--secondary);
   font-weight: 700;
+  font-family: var(--montserrat), sans-serif;
 }
 h2 {
   font-size: 48px;
+  color: var(--secondary);
   font-weight: 600;
+  font-family: var(--montserrat), sans-serif;
 }
 h3 {
   font-size: 40px;
+  color: var(--secondary);
   font-weight: 600;
+  font-family: var(--montserrat), sans-serif;
 }
 h4 {
   font-size: 32px;
+  color: var(--secondary);
   font-weight: 600;
+  font-family: var(--montserrat), sans-serif;
 }
 h5 {
   font-size: 20px;
+  color: var(--secondary);
   font-weight: 600;
+  font-family: var(--montserrat), sans-serif;
 }
 h6 {
   font-size: 16px;
+  color: var(--secondary);
   font-weight: 500;
+  font-family: var(--montserrat), sans-serif;
 }
 p {
   font-size: 16px;
   font-weight: 400;
+  color: var(--secondary);
+  font-family: var(--montserrat), sans-serif;
 }
 
 .container {
@@ -49,5 +63,10 @@ p {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background-color: red;
+}
+.container-main {
+  background-color: var(--primary);
+}
+.container-dashboard {
+  background-color: var(--fifth);
 }
