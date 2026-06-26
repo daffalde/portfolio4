@@ -90,9 +90,9 @@ export default function Addporto({ onClose }: fungsiCancel) {
           <textarea placeholder="Website Description...."></textarea>
           <input className="input-text" type="text" placeholder="Link...." />
           <select name="" id="">
-            <option value="online">🟢 Online</option>
-            <option value="production">🟡 Production</option>
-            <option value="offline">🔴 Offline</option>
+            <option value={1}>🟢 Online</option>
+            <option value={2}>🟡 Production</option>
+            <option value={3}>🔴 Offline</option>
           </select>
           <div className={styles.button_action}>
             <button onClick={onClose} className="second-button">
