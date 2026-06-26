@@ -34,7 +34,6 @@ export async function HandlePostProject(dataInsert: postProject) {
         },
       ])
       .select();
-    console.log("data terkirim");
     window.location.reload();
   } catch (err) {
     console.log(err);

@@ -11,6 +11,8 @@
   align-items: start;
   gap: 20px;
   transition: 0.5s;
+  position: sticky;
+  top: 20px;
 }
 .dashboard_logo {
   width: 92px;
@@ -89,7 +91,7 @@
   transition: 0.3s;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .dashnav {
     align-items: center;
     width: 75px;
