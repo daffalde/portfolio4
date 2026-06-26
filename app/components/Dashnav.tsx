@@ -3,8 +3,10 @@
 import Image from "next/image";
 import styles from "./dashnav.module.css";
 import { useEffect, useState } from "react";
+import Addporto from "./Addporto";
 
 export default function Dashnav() {
+  const [showAdd, setShowAdd] = useState<Boolean>(false);
   const navButton = [
     { image: "/dn-project.webp", name: "Project" },
     { image: "/dn-skill.webp", name: "Skill" },
@@ -24,7 +26,7 @@ export default function Dashnav() {
   return (
     <>
       <div className={styles.dashnav}>
-        {/* <Image src={"/logo.webp"} alt="website logo" height={30} width={92} /> */}
+        {showAdd && <Addporto onClose={() => setShowAdd(false)} />}
         <div className={styles.dashboard_logo}></div>
         <div className={styles.dashnav_button}>
           <ul>
@@ -48,7 +50,10 @@ export default function Dashnav() {
           <ul>
             <li>
               {" "}
-              <button className={styles.nav_button}>
+              <button
+                onClick={() => setShowAdd(true)}
+                className={styles.nav_button}
+              >
                 <Image
                   src={"/dn-add.webp"}
                   alt="sign out icon"
