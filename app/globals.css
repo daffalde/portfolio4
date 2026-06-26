@@ -160,6 +160,7 @@ option {
   cursor: pointer;
   padding: 10px 20px;
   transition: 0.3s;
+  gap: 5px;
 }
 .main-button:hover {
   filter: brightness(0.7);
@@ -169,6 +170,7 @@ option {
   filter: brightness(0.7);
   transform: scale(0.9);
 }
+
 .second-button {
   display: flex;
   justify-content: center;
@@ -181,6 +183,7 @@ option {
   cursor: pointer;
   padding: 10px 20px;
   transition: 0.3s;
+  gap: 5px;
 }
 .second-button:hover {
   filter: brightness(0.7);
@@ -190,6 +193,12 @@ option {
   filter: brightness(0.7);
   transform: scale(0.9);
 }
+
+.button-false {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .container {
   width: 100%;
   height: fit-content;
