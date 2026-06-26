@@ -24,7 +24,8 @@ export default function Dashnav() {
   return (
     <>
       <div className={styles.dashnav}>
-        <Image src={"/logo.webp"} alt="website logo" height={30} width={92} />
+        {/* <Image src={"/logo.webp"} alt="website logo" height={30} width={92} /> */}
+        <div className={styles.dashboard_logo}></div>
         <div className={styles.dashnav_button}>
           <ul>
             {navButton.map((e, i) => (
@@ -54,7 +55,7 @@ export default function Dashnav() {
                   width={24}
                   height={24}
                 />{" "}
-                <p>Add Project</p>
+                <h6>Add Project</h6>
               </button>
             </li>
             <li>
@@ -69,7 +70,7 @@ export default function Dashnav() {
                   width={24}
                   height={24}
                 />{" "}
-                <p>Go to site</p>
+                <h6>Go to site</h6>
               </button>
             </li>
           </ul>
@@ -81,7 +82,7 @@ export default function Dashnav() {
             width={24}
             height={24}
           />{" "}
-          <p>Sign Out</p>
+          <h6>Sign Out</h6>
         </button>
       </div>
     </>
