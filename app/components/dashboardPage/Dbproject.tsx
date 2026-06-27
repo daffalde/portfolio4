@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./dbpage.module.css";
 import { createClient } from "@/app/utils/supabase/client";
 import Image from "next/image";
+import { HandlePatchProject } from "../Postdata";
 
 interface getData {
   id_project: number;
@@ -45,6 +46,10 @@ export default function DbProject() {
     setGetImage(file);
   }
 
+  const [title, setTitle] = useState<String>("");
+  const [desc, setDesc] = useState<String>("");
+  const [link, setLink] = useState<String>("");
+  const [status, setStatus] = useState<Number>(3);
   const [getLogo, setGetLogo] = useState<File | null>();
   const [getLogoUrl, setLogoUrl] = useState<String | null>();
 
@@ -181,22 +186,28 @@ export default function DbProject() {
                   *Click image to change picture
                 </p>
                 <input
+                  onChange={(e) => setTitle(e.target.value)}
                   className="input-text"
                   type="text"
                   placeholder="Title...."
                   defaultValue={e.p_name}
                 />
                 <textarea
+                  onChange={(e) => setDesc(e.target.value)}
                   placeholder="Website description...."
                   defaultValue={e.p_desc}
                 ></textarea>
                 <input
+                  onChange={(e) => setLink(e.target.value)}
                   className="input-text"
                   type="text"
                   placeholder="Link...."
                   defaultValue={e.p_link}
                 />
-                <select defaultValue={e.p_status}>
+                <select
+                  onChange={(e) => setStatus(Number(e.target.value))}
+                  defaultValue={e.p_status}
+                >
                   <option hidden value="0">
                     Select type
                   </option>
@@ -212,17 +223,20 @@ export default function DbProject() {
                     <h6>Cancel</h6>
                   </button>
                   <button
-                    // onClick={() => {
-                    //   setIsLoading(true);
-                    //   HandlePostProject({
-                    //     title: title,
-                    //     desc: desc,
-                    //     link: link,
-                    //     status: status,
-                    //     image: image,
-                    //     logo: logo,
-                    //   });
-                    // }}
+                    onClick={() => {
+                      setIsLoading(true);
+                      HandlePatchProject({
+                        id: e.id_project,
+                        title: title === "" ? e.p_name : title,
+                        desc: desc === "" ? e.p_desc : desc,
+                        link: link === "" ? e.p_link : link,
+                        status: status,
+                        image: getImage,
+                        imageName: String(e.p_image.split("/").pop()),
+                        logo: getLogo,
+                        logoName: String(e.p_logo.split("/").pop()),
+                      });
+                    }}
                     className={`main-button ${isLoading ? "button-false" : null}`}
                   >
                     {isLoading && (
