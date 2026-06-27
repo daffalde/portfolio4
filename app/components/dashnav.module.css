@@ -11,7 +11,7 @@
   align-items: start;
   gap: 20px;
   transition: 0.5s;
-  position: sticky;
+  position: absolute;
   top: 20px;
 }
 .dashboard_logo {
@@ -112,5 +112,43 @@
   .nav_button h6,
   .signout_buton h6 {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .dashnav {
+    flex-direction: row;
+    width: calc(100% - 20px);
+    max-width: none;
+    left: 10px;
+    justify-content: center;
+    height: fit-content;
+    padding: 10px;
+    top: calc(100dvh - 100px);
+  }
+  .dashnav_button,
+  .dashnav_button ul {
+    flex-direction: row;
+    width: fit-content;
+    border-top: none;
+    padding: 0 0;
+    gap: 10px;
+  }
+  .signout_buton {
+    width: fit-content;
+  }
+  .dashboard_logo {
+    display: none;
+  }
+  .nav_button,
+  .dashnav_button ul li {
+    width: fit-content;
+  }
+  .signout_buton {
+    display: none;
+  }
+  .nav_button img {
+    height: 8vw;
+    width: 8vw;
   }
 }

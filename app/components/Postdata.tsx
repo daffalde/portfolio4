@@ -39,3 +39,11 @@ export async function HandlePostProject(dataInsert: postProject) {
     console.log(err);
   }
 }
+
+export async function HanldePatchProject(dataInsert: postProject) {
+  const supabase = createClient();
+  try {
+  } catch (err) {
+    console.log(err);
+  }
+}

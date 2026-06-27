@@ -14,4 +14,19 @@
   display: flex;
   justify-content: start;
   align-items: start;
+  padding-left: 290px;
+}
+
+@media (max-width: 1200px) {
+  .dashboard_content {
+    padding-left: 95px;
+  }
+}
+@media (max-width: 500px) {
+  .dashboard_content {
+    padding-left: 0;
+  }
+  .container_dashboard {
+    padding: 10px;
+  }
 }

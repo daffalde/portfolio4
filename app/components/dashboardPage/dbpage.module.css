@@ -1,15 +1,50 @@
 .left,
 .right {
   width: 100%;
-  height: fit-content;
-  min-height: calc(100dvh - 40px);
+  height: calc(100dvh - 40px);
+  overflow: auto;
+  scrollbar-width: thin;
+  transition: 1s;
 }
 .left {
   padding-right: 10px;
 }
 .right {
-  padding-left: 10px;
-  border-left: 1px solid var(--fourth);
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid var(--fourth);
+}
+
+.dbproject_hide {
+  animation: hide 0.3s forwards;
+}
+.dbproject_show {
+  animation: show 0.3s forwards;
+}
+@keyframes hide {
+  0% {
+    width: 100%;
+    opacity: 1;
+    pointer-events: all;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+  }
+}
+@keyframes show {
+  0% {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+    pointer-events: all;
+  }
 }
 
 /* project____________________________ */
@@ -70,10 +105,34 @@
   justify-content: center;
   align-items: center;
 }
+.button_action {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
 
 @media (max-width: 1000px) {
   .dbproject_left {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 800px) {
+  .dbproject_float {
+    position: absolute;
+    background-color: var(--fifth);
+    width: calc(100% - 135px) !important;
+  }
+}
+@media (max-width: 500px) {
+  .dbproject_float {
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    border: none;
+    padding: 10px;
+  }
+}
+
 /* ___________________________________ */

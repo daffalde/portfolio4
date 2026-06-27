@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   backdrop-filter: blur(5px);
-  z-index: 2;
+  z-index: 9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@
   align-items: start;
   gap: 20px;
   overflow: auto;
-  z-index: 3;
+  z-index: 10;
   position: fixed;
   top: 50%;
   left: 50%;

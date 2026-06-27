@@ -26,7 +26,6 @@ export default function Dashnav() {
   return (
     <>
       <div className={styles.dashnav}>
-        {showAdd && <Addporto onClose={() => setShowAdd(false)} />}
         <div className={styles.dashboard_logo}></div>
         <div className={styles.dashnav_button}>
           <ul>
@@ -89,6 +88,7 @@ export default function Dashnav() {
           />{" "}
           <h6>Sign Out</h6>
         </button>
+        {showAdd && <Addporto onClose={() => setShowAdd(false)} />}
       </div>
     </>
   );

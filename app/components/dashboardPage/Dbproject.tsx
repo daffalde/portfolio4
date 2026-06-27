@@ -14,15 +14,19 @@ interface getData {
 }
 
 export default function DbProject() {
+  const [showEdit, setShowEdit] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [data, setData] = useState<getData[] | null>([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const supabase = createClient();
     async function handleGetData() {
       try {
         const { data, error } = await supabase.from("project").select("*");
         console.log(data);
         setData(data);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -31,6 +35,24 @@ export default function DbProject() {
   }, []);
 
   const [select, setSelect] = useState<Number | null>();
+
+  const [getImage, setGetImage] = useState<File | null>();
+  const [getImageUrl, setImageUrl] = useState<String | null>();
+
+  function handleImage(e: any) {
+    const file = e.target.files?.[0];
+    setImageUrl(URL.createObjectURL(file));
+    setGetImage(file);
+  }
+
+  const [getLogo, setGetLogo] = useState<File | null>();
+  const [getLogoUrl, setLogoUrl] = useState<String | null>();
+
+  function handleLogo(e: any) {
+    const file = e.target.files?.[0];
+    setLogoUrl(URL.createObjectURL(file));
+    setGetLogo(file);
+  }
   return (
     <>
       <div className={`${styles.left} ${styles.dbproject_left}`}>
@@ -41,7 +63,10 @@ export default function DbProject() {
               style={
                 select === e.id_project ? { border: `1px solid white` } : {}
               }
-              onClick={() => setSelect(e.id_project)}
+              onClick={() => {
+                setSelect(e.id_project);
+                setShowEdit(true);
+              }}
               key={e.id_project}
               className={styles.item_dbproject}
             >
@@ -84,13 +109,77 @@ export default function DbProject() {
             </div>
           ))}
       </div>
-      <div className={`${styles.right}`}>
+
+      <div
+        className={`${styles.right} ${showEdit ? styles.dbproject_show : styles.dbproject_hide}  ${styles.dbproject_float} `}
+      >
         {select ? (
           data
             ?.filter((e) => e.id_project === select)
             .map((e, i) => (
               <div key={e.id_project} className={styles.dbproject_right}>
                 <h5>Edit Project</h5>
+                <div className="input-file-long-wrap">
+                  {getImageUrl ? (
+                    <div
+                      style={{
+                        backgroundImage: `url(${getImageUrl ? getImageUrl : "none"})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        opacity: "1",
+                        borderRadius: "5px",
+                      }}
+                    ></div>
+                  ) : (
+                    <div
+                      style={{
+                        backgroundImage: `url(${e.p_image})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        opacity: "1",
+                        borderRadius: "5px",
+                      }}
+                    ></div>
+                  )}
+                  <input
+                    onChange={handleImage}
+                    className="input-file-long"
+                    type="file"
+                  />
+                </div>
+                <div className="input-file-short-wrap">
+                  {getLogoUrl ? (
+                    <div
+                      style={{
+                        backgroundImage: `url(${getLogoUrl ? getLogoUrl : "none"})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "80% auto ",
+                        backgroundRepeat: "no-repeat",
+                        opacity: "1",
+                        borderRadius: "5px",
+                      }}
+                    ></div>
+                  ) : (
+                    <div
+                      style={{
+                        backgroundImage: `url(${e.p_logo})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "80% auto ",
+                        backgroundRepeat: "no-repeat",
+                        opacity: "1",
+                        borderRadius: "5px",
+                      }}
+                    ></div>
+                  )}
+                  <input
+                    onChange={handleLogo}
+                    className="input-file-short"
+                    type="file"
+                  />
+                </div>
+                <p style={{ fontSize: "12px" }}>
+                  *Click image to change picture
+                </p>
                 <input
                   className="input-text"
                   type="text"
@@ -115,6 +204,38 @@ export default function DbProject() {
                   <option value="2">🟡 Production</option>
                   <option value="3">🔴 Offline</option>
                 </select>
+                <div className={styles.button_action}>
+                  <button
+                    onClick={() => setShowEdit(false)}
+                    className={`second-button ${isLoading ? "button-false" : null}`}
+                  >
+                    <h6>Cancel</h6>
+                  </button>
+                  <button
+                    // onClick={() => {
+                    //   setIsLoading(true);
+                    //   HandlePostProject({
+                    //     title: title,
+                    //     desc: desc,
+                    //     link: link,
+                    //     status: status,
+                    //     image: image,
+                    //     logo: logo,
+                    //   });
+                    // }}
+                    className={`main-button ${isLoading ? "button-false" : null}`}
+                  >
+                    {isLoading && (
+                      <Image
+                        src={"/loading.gif"}
+                        alt="loading icon"
+                        width={20}
+                        height={20}
+                      />
+                    )}
+                    <h6>Save</h6>
+                  </button>
+                </div>
               </div>
             ))
         ) : (

@@ -11,10 +11,10 @@ export default function Dashboard() {
     <>
       <div className="container container-dashboard">
         <div className={styles.container_dashboard}>
-          <Dashnav />
           <div className={styles.dashboard_content}>
             <DbProject />
           </div>
+          <Dashnav />
         </div>
       </div>
     </>
