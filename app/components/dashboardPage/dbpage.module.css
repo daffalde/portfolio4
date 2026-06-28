@@ -135,4 +135,38 @@
   }
 }
 
+/* Skill______________________________ */
+.db_skill {
+  width: 100%;
+  min-height: calc(100dvh - 40px);
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 20px;
+}
+.db_skill_add {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+}
+.db_skill_add_input {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
+@media (max-width: 650px) {
+  .db_skill_add_input {
+    flex-direction: column;
+  }
+  .db_skill_add_input button {
+    width: 100%;
+  }
+}
 /* ___________________________________ */

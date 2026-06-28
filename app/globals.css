@@ -113,6 +113,7 @@ textarea {
   align-items: center;
   border-radius: 5px;
   border: 2px dashed var(--fourth);
+  padding: 5px;
 }
 .input-file-short-wrap div {
   display: flex;
@@ -214,4 +215,9 @@ option {
 }
 .container-dashboard {
   background-color: var(--fifth);
+}
+
+.divider-horizontal {
+  width: 100%;
+  border: 1px solid var(--fourth);
 }
