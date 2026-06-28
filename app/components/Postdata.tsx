@@ -95,3 +95,27 @@ export async function HandleDeleteProject(dataInsert: deleteProject) {
     console.log(err);
   }
 }
+
+interface postSkill {
+  image: any;
+  category: String;
+  name: String;
+}
+
+export async function HandlePostSkill(dataInsert: postSkill) {
+  const supabase = createClient();
+
+  try {
+    const { data, error } = await supabase.storage
+      .from("images")
+      .upload(`${Date.now()}`, dataInsert.image);
+    await supabase.from("skill").insert({
+      s_image: `https://jmkviwizozicwpfhqhjm.supabase.co/storage/v1/object/public/images/${data?.path}?t=123`,
+      s_category: dataInsert.category,
+      s_name: dataInsert.name,
+    });
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+}

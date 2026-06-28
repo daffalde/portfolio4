@@ -1,10 +1,15 @@
 import { useState } from "react";
 import styles from "./dbpage.module.css";
 import Image from "next/image";
+import { HandlePostSkill } from "../Postdata";
 
 export default function Dbskill() {
+  const [category, setCategory] = useState<String>("");
+  const [name, setName] = useState<String>("");
   const [logo, setLogo] = useState<any>();
   const [logoPreview, setLogoPreview] = useState<String>("");
+
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   function getLogoImage(e: any) {
     const file = e.target.files?.[0];
@@ -47,7 +52,7 @@ export default function Dbskill() {
                 type="file"
               />
             </div>
-            <select>
+            <select onChange={(e) => setCategory(e.target.value)}>
               <option hidden value="">
                 Category
               </option>
@@ -57,15 +62,26 @@ export default function Dbskill() {
               <option value="DevOps & Cloud">DevOps & Cloud</option>
             </select>
             <input
+              onChange={(e) => setName(e.target.value)}
               style={{ width: "100%" }}
               className="input-text"
               type="text"
               placeholder="Skill name...."
             />
-            <button className="main-button">
+            <button
+              onClick={() => {
+                setIsLoading(true);
+                HandlePostSkill({
+                  image: logo,
+                  category: category,
+                  name: name,
+                });
+              }}
+              className="main-button"
+            >
               <h6>Submit</h6>
               <Image
-                src={"/submit.png"}
+                src={`/${isLoading ? "loading.gif" : "submit.png"}`}
                 alt="submit icon"
                 width={20}
                 height={20}
