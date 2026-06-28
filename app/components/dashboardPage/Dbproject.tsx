@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./dbpage.module.css";
 import { createClient } from "@/app/utils/supabase/client";
 import Image from "next/image";
-import { HandlePatchProject } from "../Postdata";
+import { HandleDeleteProject, HandlePatchProject } from "../Postdata";
 
 interface getData {
   id_project: number;
@@ -216,6 +216,18 @@ export default function DbProject() {
                   <option value="3">🔴 Offline</option>
                 </select>
                 <div className={styles.button_action}>
+                  <button
+                    onClick={() => HandleDeleteProject({ id: e.id_project })}
+                    style={{ padding: "8px" }}
+                    className="second-button"
+                  >
+                    <Image
+                      src={"/trash.png"}
+                      alt="delete icon button"
+                      width={25}
+                      height={25}
+                    />
+                  </button>
                   <button
                     onClick={() => setShowEdit(false)}
                     className={`second-button ${isLoading ? "button-false" : null}`}

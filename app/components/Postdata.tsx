@@ -35,6 +35,7 @@ export async function HandlePostProject(dataInsert: postProject) {
         },
       ])
       .select();
+    window.location.reload();
   } catch (err) {
     console.log(err);
   }
@@ -75,6 +76,20 @@ export async function HandlePatchProject(dataInsert: editProject) {
         p_status: dataInsert.status,
       })
       .eq("id_project", dataInsert.id);
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+interface deleteProject {
+  id: Number;
+}
+export async function HandleDeleteProject(dataInsert: deleteProject) {
+  const supabase = createClient();
+
+  try {
+    await supabase.from("project").delete().eq("id_project", dataInsert.id);
     window.location.reload();
   } catch (err) {
     console.log(err);
