@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Dashnav from "../components/Dashnav";
 import styles from "./dashboard.module.css";
 import { createClient } from "../utils/supabase/client";
 import DbProject from "../components/dashboardPage/Dbproject";
+import Popup from "../components/Popup";
 
 export default function Dashboard() {
   return (
