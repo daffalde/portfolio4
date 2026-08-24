@@ -15,5 +15,10 @@ func IntegratedRoute() *gin.Engine {
 	r.POST("/skill/input", handlers.InsertSkillHandle)
 	r.DELETE("/skill/delete", handlers.DeleteSkillHandle)
 
+	r.GET("/message", handlers.GetAllMessageHandle)
+	r.GET("/message/select", handlers.GetByIdMessageHandle)
+	r.POST("/message/input", handlers.InsertMessageHandle)
+	r.DELETE("/message/delete", handlers.DeleteMessageHandle)
+
 	return r
 }
