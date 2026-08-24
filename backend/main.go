@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/config"
 	"backend/routes"
 	"fmt"
 	"os"
@@ -9,6 +10,8 @@ import (
 )
 
 func main() {
+	config.ConnectDB()
+	routes.IntegratedRoute()
 	godotenv.Load()
 	fmt.Println("Server running....")
 	r := routes.IntegratedRoute()

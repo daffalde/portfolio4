@@ -1,6 +1,8 @@
 services:
   backend:
     container_name: golang
+    env_file:
+      - ./backend/.env
     depends_on:
       - db
     build:
