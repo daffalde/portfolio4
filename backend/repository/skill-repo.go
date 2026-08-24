@@ -10,3 +10,8 @@ func GetAllSkill() ([]models.Skill, error) {
 	result := config.DB.Find(&m)
 	return m, result.Error
 }
+
+func InsertSkill(m *models.Skill) error {
+	err := config.DB.Create(m)
+	return err.Error
+}
