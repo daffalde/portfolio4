@@ -15,3 +15,8 @@ func InsertSkill(m *models.Skill) error {
 	err := config.DB.Create(m)
 	return err.Error
 }
+
+func DeleteSkill(id models.Skill) error {
+	err := config.DB.Delete(id)
+	return err.Error
+}

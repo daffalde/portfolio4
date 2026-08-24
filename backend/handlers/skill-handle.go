@@ -29,13 +29,13 @@ func InsertSkillHandle(c *gin.Context) {
 
 	src, err := file.Open()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "step 1"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	getUrl, err := services.UploadFile(src, getId.String(), file.Header.Get("Content-Type"))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "step 2"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -46,9 +46,29 @@ func InsertSkillHandle(c *gin.Context) {
 
 	err = repository.InsertSkill(&m)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "step 3"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Data ditambahkan"})
+}
+
+func DeleteSkillHandle(c *gin.Context) {
+	getId := c.Query("id")
+
+	id, err := uuid.Parse(getId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	err = services.DeleteFile(getId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	repository.DeleteSkill(models.Skill{IdSkill: id})
+
+	c.JSON(http.StatusOK, gin.H{"message": "Data dihapus"})
+
 }
