@@ -11,5 +11,9 @@ func IntegratedRoute() *gin.Engine {
 
 	r.GET("/project", handlers.GetAllProjectHandle)
 
+	r.GET("/skill", handlers.GetAllSkillHandle)
+	r.POST("/skill/input", handlers.InsertSkillHandle)
+	r.DELETE("/skill/delete", handlers.DeleteSkillHandle)
+
 	return r
 }

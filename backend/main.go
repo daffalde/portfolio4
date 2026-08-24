@@ -11,6 +11,7 @@ import (
 
 func main() {
 	config.ConnectDB()
+	config.ConnectAWS()
 	routes.IntegratedRoute()
 	godotenv.Load()
 	fmt.Println("Server running....")
