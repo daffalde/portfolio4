@@ -21,7 +21,9 @@ export default function DashboardProject() {
   useEffect(() => {
     async function getData() {
       try {
-        const res = await fetch(`http://localhost:8080/project`);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/project`,
+        );
         const json = await res.json();
         console.log(json);
         setData(json);
