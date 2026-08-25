@@ -4,7 +4,55 @@
   box-sizing: border-box;
   font-family: var(--font-outfit);
 }
+:root {
+  /* color */
+  --bg-main: #0d0d0d;
+  --bg-second: #1a1a1a;
+  --bg-third: #262626;
+  --primary: #ff7517;
+  --border: #404040;
+  --text-main: #f2f2f2;
+  --text-second: #b3b3b3;
+}
 
 h1 {
   line-height: 96px;
+  font-weight: 500;
+  font-size: 64px;
+  color: var(--text-main);
+}
+h2 {
+  font-size: 48px;
+  color: var(--text-main);
+  font-weight: 400;
+}
+h3 {
+  color: var(--text-main);
+  font-size: 40px;
+  font-weight: 500;
+}
+h4 {
+  color: var(--text-main);
+  font-size: 32px;
+  font-weight: 500;
+}
+h5 {
+  color: var(--text-main);
+  font-size: 20px;
+  font-weight: 500;
+}
+h6 {
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 500;
+}
+p {
+  color: var(--text-main);
+  font-weight: 400;
+  font-size: 16px;
+}
+.p-second {
+  color: var(--text-second);
+  font-size: 16px;
+  font-weight: 300;
 }
