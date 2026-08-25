@@ -25,9 +25,15 @@
   width: 100%;
   min-height: calc(100dvh - 40px);
   height: fit-content;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
 }
 .db-c-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }

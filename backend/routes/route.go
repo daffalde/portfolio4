@@ -3,11 +3,13 @@ package routes
 import (
 	"backend/handlers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func IntegratedRoute() *gin.Engine {
 	r := gin.Default()
+	r.Use(cors.Default())
 
 	r.GET("/project", handlers.GetAllProjectHandle)
 	r.GET("/project/select", handlers.GetByIdProjectHandle)
