@@ -1,11 +1,13 @@
 .content {
   width: 100%;
+  min-height: 80dvh;
   height: fit-content;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .item {
   width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +25,7 @@
   transition: 0.3s;
 }
 .item:hover {
-  transform: scale(1.03);
+  transform: scale(1.01);
   transition: 0.3s;
 }
 .item a {

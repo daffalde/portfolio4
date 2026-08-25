@@ -16,14 +16,14 @@
   min-height: 100dvh;
   height: fit-content;
   display: flex;
-  justify-content: left;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   padding: 20px;
   gap: 20px;
+  box-sizing: border-box;
 }
 .db-content {
   width: 100%;
-  min-height: calc(100dvh - 40px);
   height: fit-content;
   gap: 20px;
   display: flex;

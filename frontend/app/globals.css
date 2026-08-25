@@ -78,3 +78,10 @@ p {
 .btn-main:active {
   opacity: 0.5;
 }
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

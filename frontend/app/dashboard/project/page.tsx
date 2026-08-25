@@ -66,6 +66,7 @@ export default function DashboardProject() {
                 })
               ) : (
                 <img
+                  className="loading"
                   style={{ width: "50px" }}
                   src="/loading.gif"
                   alt="loading icon"
