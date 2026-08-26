@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import styles from "./dbNavbar.module.css";
 import Link from "next/link";
+import { useState } from "react";
+import { PopUpBody } from "./DbPopUp";
 
 export default function DbNavbar() {
   const getPath = usePathname();
@@ -38,9 +40,12 @@ export default function DbNavbar() {
       link: "#",
     },
   ];
+
+  const [popUp, setPopUp] = useState(false);
   return (
     <>
       <div className={styles.body}>
+        {popUp ? <PopUpBody close={() => setPopUp(false)} /> : null}
         <img src="/short-logo.png" alt="website logo" />
         <div className={`${styles.main}`}>
           <div className={styles.bg}>
@@ -55,7 +60,10 @@ export default function DbNavbar() {
             ))}
           </div>
           <div className={styles.bg}>
-            <button className={`${styles.button} `}>
+            <button
+              onClick={() => setPopUp(true)}
+              className={`${styles.button} `}
+            >
               <img src={"/add.png"} alt="add icon" />
             </button>
             <button

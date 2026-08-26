@@ -48,10 +48,10 @@ export default function DashboardProject() {
     }
     getData();
   }, []);
+
   return (
     <>
       <div className="db-body">
-        <PopUpBody />
         {notif ? (
           <Notification
             condition={Boolean(notifMessage?.condition)}

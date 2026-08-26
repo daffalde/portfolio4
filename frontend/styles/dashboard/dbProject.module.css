@@ -3,9 +3,11 @@
   min-height: 80dvh;
   height: fit-content;
   display: grid;
+  gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .item {
+  cursor: default;
   width: 100%;
   height: fit-content;
   display: flex;
