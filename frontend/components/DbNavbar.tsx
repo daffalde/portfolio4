@@ -47,6 +47,7 @@ export default function DbNavbar() {
       <div className={styles.body}>
         {popUp ? (
           <PopUpBody
+            type="project"
             close={() => {
               setPopUp(false);
             }}
