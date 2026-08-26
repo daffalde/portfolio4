@@ -6,6 +6,7 @@ import styles from "../../../styles/dashboard/dbProject.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Notification from "@/components/Notification";
+import { PopUpBody } from "@/components/DbPopUp";
 
 interface project {
   CreatedAt: any;
@@ -50,6 +51,7 @@ export default function DashboardProject() {
   return (
     <>
       <div className="db-body">
+        <PopUpBody />
         {notif ? (
           <Notification
             condition={Boolean(notifMessage?.condition)}

@@ -68,6 +68,7 @@ p {
   border-radius: 999px;
   padding: 10px 20px;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 .btn-main img {
   width: 20px;
@@ -76,6 +77,29 @@ p {
   opacity: 0.75;
 }
 .btn-main:active {
+  opacity: 0.5;
+}
+
+.btn-second {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg-second);
+  border: none;
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+.btn-second img {
+  width: 20px;
+}
+.btn-second:hover {
+  opacity: 0.75;
+}
+.btn-second:active {
   opacity: 0.5;
 }
 
