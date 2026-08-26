@@ -15,6 +15,18 @@
   --text-second: #b3b3b3;
 }
 
+/* ______________________________________________________ */
+.homepage {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--bg-second);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+/* ______________________________________________________ */
+
 h1 {
   line-height: 96px;
   font-weight: 500;
