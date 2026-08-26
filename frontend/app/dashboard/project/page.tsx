@@ -5,6 +5,7 @@ import "../../../styles/dashboard/dashboardGlobal.css";
 import styles from "../../../styles/dashboard/dbProject.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Notification from "@/components/Notification";
 
 interface project {
   CreatedAt: any;
@@ -16,8 +17,16 @@ interface project {
   Type: string;
 }
 
+interface notif {
+  condition: boolean;
+  title: string;
+  desc: string;
+}
+
 export default function DashboardProject() {
   const [data, setData] = useState<project[]>();
+  const [notif, SetNotif] = useState(false);
+  const [notifMessage, SetNotifMessage] = useState<notif>();
   useEffect(() => {
     async function getData() {
       try {
@@ -28,7 +37,12 @@ export default function DashboardProject() {
         console.log(json);
         setData(json);
       } catch (err) {
-        console.log(err);
+        SetNotif(true);
+        SetNotifMessage({
+          condition: false,
+          title: "Data Fetch Failed",
+          desc: "Unable to retrieve project data from the server.",
+        });
       }
     }
     getData();
@@ -36,6 +50,13 @@ export default function DashboardProject() {
   return (
     <>
       <div className="db-body">
+        {notif ? (
+          <Notification
+            condition={Boolean(notifMessage?.condition)}
+            headline={String(notifMessage?.title)}
+            desc={String(notifMessage?.desc)}
+          />
+        ) : null}
         <div className="db-page">
           <DbNavbar />
           <div className="db-content">
@@ -64,6 +85,8 @@ export default function DashboardProject() {
                     </div>
                   );
                 })
+              ) : notif ? (
+                <p className="p-second">No data available.</p>
               ) : (
                 <img
                   className="loading"
