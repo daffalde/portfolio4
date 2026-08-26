@@ -171,7 +171,7 @@ function AddProject() {
 }
 
 interface skillInput {
-  name: string;
+  nameSkill: string;
   category: string;
 }
 
@@ -180,7 +180,7 @@ function AddSkill() {
   const [file, setFile] = useState<any>(null);
   const [preview, setPreview] = useState<any>(null);
   const [formValue, setFormValue] = useState<skillInput>({
-    name: "",
+    nameSkill: "",
     category: "",
   });
 
@@ -246,8 +246,8 @@ function AddSkill() {
           <input
             type="text"
             placeholder="Skill Title...."
-            name="name"
-            value={formValue.name}
+            name="nameSkill"
+            value={formValue.nameSkill}
             onChange={handleChange}
           />
           <select
