@@ -2,17 +2,24 @@
 
 import { useState } from "react";
 import styles from "./dbPopUp.module.css";
+import Notification from "./Notification";
 
 interface closeProp {
-  close: () => void;
+  close: () => void | Promise<void>;
+}
+
+interface notif {
+  condition: boolean;
+  title: string;
+  desc: string;
 }
 
 export function PopUpBody({ close }: closeProp) {
   return (
-    <div onClick={close} className={styles.bg}>
+    <div className={styles.bg}>
       <div className={styles.body}>
         <div className={styles.header}>
-          <button>
+          <button onClick={close}>
             <img src="/back.png" alt="back icon" />
           </button>
           <h5>Add Project</h5>
@@ -24,6 +31,9 @@ export function PopUpBody({ close }: closeProp) {
 }
 
 function AddProject() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [notif, SetNotif] = useState<boolean>(false);
+  const [notifMessage, setNotifMessage] = useState<notif>();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -52,6 +62,7 @@ function AddProject() {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     if (!file) return;
 
     const data = new FormData();
@@ -62,23 +73,39 @@ function AddProject() {
     data.append("link", formData.link);
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/project/input`,
-        {
-          method: "POST",
-          body: data,
-        },
-      );
-      const result = await res.json();
-      console.log("Response:", result);
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/project/input`, {
+        method: "POST",
+        body: data,
+      });
+      setLoading(false);
+      SetNotif(true);
+      setNotifMessage({
+        condition: true,
+        title: "Added Successfully",
+        desc: "Project has been saved without issues.",
+      });
+      window.location.reload();
     } catch (err) {
-      console.error("Error:", err);
+      setLoading(false);
+      SetNotif(true);
+      setNotifMessage({
+        condition: true,
+        title: "Failed to Add Data",
+        desc: "An error occurred while saving your project.",
+      });
     }
   };
 
   return (
     <>
       <div className={styles.contentBody}>
+        {notif ? (
+          <Notification
+            condition={Boolean(notifMessage?.condition)}
+            headline={String(notifMessage?.title)}
+            desc={String(notifMessage?.desc)}
+          />
+        ) : null}
         <span>
           <h6>Image Upload</h6>
           <div
@@ -134,6 +161,7 @@ function AddProject() {
       </div>
       <div className={styles.actionButton}>
         <button onClick={handleSubmit} className="btn-main">
+          {loading ? <img src="/loading.gif" alt="loading icon" /> : null}
           Add
         </button>
       </div>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Notification from "@/components/Notification";
 import { PopUpBody } from "@/components/DbPopUp";
+import PopUp from "@/components/PopUp";
 
 interface project {
   CreatedAt: any;
@@ -49,9 +50,38 @@ export default function DashboardProject() {
     getData();
   }, []);
 
+  const [openAdd, setOpenAdd] = useState<boolean>(false);
+
+  const [getIdDelete, setGetIdDelete] = useState<string>("");
+  async function deleteProject() {
+    try {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/project/delete?id=${getIdDelete}`,
+        {
+          method: "DELETE",
+        },
+      );
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const [deletePopUp, setDeletePopUp] = useState<boolean>(false);
+
   return (
     <>
       <div className="db-body">
+        {openAdd ? <PopUpBody close={() => setOpenAdd(false)} /> : null}
+        {deletePopUp ? (
+          <PopUp
+            title="Delete project?"
+            close={() => setDeletePopUp(false)}
+            action={deleteProject}
+            button="Yes, Delete."
+            desc="Your are going to delete project?"
+          />
+        ) : null}
         {notif ? (
           <Notification
             condition={Boolean(notifMessage?.condition)}
@@ -64,7 +94,7 @@ export default function DashboardProject() {
           <div className="db-content">
             <div className="db-c-header">
               <h2>Project</h2>
-              <button className="btn-main">
+              <button onClick={() => setOpenAdd(true)} className="btn-main">
                 <p>New Project</p>
                 <img src="/add.png" alt="add icon" />
               </button>
@@ -81,8 +111,17 @@ export default function DashboardProject() {
                         </h5>
                       </span>
                       <p className="p-second">{e.Description}</p>
-                      <span>
+                      <span className={styles.itemAction}>
                         <Link href={e.Link}>Visit Website</Link>
+                        <button
+                          onClick={() => {
+                            setGetIdDelete(e.IdProject);
+                            setDeletePopUp(true);
+                          }}
+                          className={styles.deleteButton}
+                        >
+                          <img src="/trash.png" alt="delete icon" />
+                        </button>
                       </span>
                     </div>
                   );

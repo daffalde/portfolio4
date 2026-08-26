@@ -45,7 +45,13 @@ export default function DbNavbar() {
   return (
     <>
       <div className={styles.body}>
-        {popUp ? <PopUpBody close={() => setPopUp(false)} /> : null}
+        {popUp ? (
+          <PopUpBody
+            close={() => {
+              setPopUp(false);
+            }}
+          />
+        ) : null}
         <img src="/short-logo.png" alt="website logo" />
         <div className={`${styles.main}`}>
           <div className={styles.bg}>
