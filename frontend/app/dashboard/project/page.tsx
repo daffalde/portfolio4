@@ -72,7 +72,9 @@ export default function DashboardProject() {
   return (
     <>
       <div className="db-body">
-        {openAdd ? <PopUpBody close={() => setOpenAdd(false)} /> : null}
+        {openAdd ? (
+          <PopUpBody type="project" close={() => setOpenAdd(false)} />
+        ) : null}
         {deletePopUp ? (
           <PopUp
             title="Delete project?"

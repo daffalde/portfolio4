@@ -6,6 +6,7 @@ import Notification from "./Notification";
 
 interface closeProp {
   close: () => void | Promise<void>;
+  type: string;
 }
 
 interface notif {
@@ -14,7 +15,7 @@ interface notif {
   desc: string;
 }
 
-export function PopUpBody({ close }: closeProp) {
+export function PopUpBody({ close, type }: closeProp) {
   return (
     <div className={styles.bg}>
       <div className={styles.body}>
@@ -22,9 +23,9 @@ export function PopUpBody({ close }: closeProp) {
           <button onClick={close}>
             <img src="/back.png" alt="back icon" />
           </button>
-          <h5>Add Project</h5>
+          <h5>Add {type == "project" ? "Project" : "Skill"}</h5>
         </div>
-        <AddProject />
+        {type == "project" ? <AddProject /> : <AddSkill />}
       </div>
     </div>
   );
@@ -157,6 +158,111 @@ function AddProject() {
             value={formData.link}
             onChange={handleChange}
           />
+        </span>
+      </div>
+      <div className={styles.actionButton}>
+        <button onClick={handleSubmit} className="btn-main">
+          {loading ? <img src="/loading.gif" alt="loading icon" /> : null}
+          Add
+        </button>
+      </div>
+    </>
+  );
+}
+
+interface skillInput {
+  name: string;
+  category: string;
+}
+
+function AddSkill() {
+  const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<any>(null);
+  const [preview, setPreview] = useState<any>(null);
+  const [formValue, setFormValue] = useState<skillInput>({
+    name: "",
+    category: "",
+  });
+
+  function handleChange(e: any) {
+    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  }
+
+  function handleFileChange(e: any) {
+    const selectedFile = e.target.files?.[0] ?? null;
+    setFile(selectedFile);
+    if (selectedFile) {
+      setPreview(URL.createObjectURL(selectedFile));
+    }
+  }
+
+  async function handleSubmit() {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/skill/input`, {
+        method: "POST",
+        body: formData,
+      });
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+      window.location.reload();
+    }
+  }
+  return (
+    <>
+      <div className={styles.contentBody}>
+        <span>
+          <h6>Image Upload</h6>
+          <div
+            style={{
+              width: "50%",
+              height: "100px",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              backgroundImage: preview ? `url(${preview})` : "none",
+            }}
+            className="inputFile"
+          >
+            {!preview && (
+              <>
+                <img src="/upload.png" alt="upload icon" />
+                <h6>Logo</h6>
+              </>
+            )}
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+          </div>
+        </span>
+        <span>
+          <h6>Information</h6>
+          <input
+            type="text"
+            placeholder="Skill Title...."
+            name="name"
+            value={formValue.name}
+            onChange={handleChange}
+          />
+          <select
+            value={formValue.category}
+            name="category"
+            onChange={handleChange}
+          >
+            <option hidden value="#">
+              Category
+            </option>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend & Database">Backend & Database</option>
+            <option value="Languages">Languages</option>
+            <option value="DevOps & Cloud">DevOps & Cloud</option>
+          </select>
         </span>
       </div>
       <div className={styles.actionButton}>
