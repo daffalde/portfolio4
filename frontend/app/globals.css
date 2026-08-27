@@ -13,6 +13,7 @@
   --border: #404040;
   --text-main: #f2f2f2;
   --text-second: #b3b3b3;
+  --red: hsl(0, 50%, 50%);
 }
 
 /* ______________________________________________________ */
@@ -68,6 +69,11 @@ p {
   font-size: 16px;
   font-weight: 300;
 }
+.p-error {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--red);
+}
 
 .btn-main {
   display: flex;
@@ -113,6 +119,11 @@ p {
 }
 .btn-second:active {
   opacity: 0.5;
+}
+
+.btn-disable {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .loading {
@@ -164,4 +175,8 @@ input[type="file"] {
   opacity: 0;
   cursor: pointer;
   z-index: 1;
+}
+
+.input-warning {
+  border: 2px solid var(--red);
 }

@@ -68,6 +68,16 @@ func LoginUserHandle(c *gin.Context) {
 		return
 	}
 
+	c.SetCookie(
+		"access_token",
+		tokenString,
+		3600,
+		"/",
+		"localhost",
+		false,
+		false,
+	)
+
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Login berhasil",
 		"token":   tokenString,
