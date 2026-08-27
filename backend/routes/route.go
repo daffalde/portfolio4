@@ -11,6 +11,9 @@ func IntegratedRoute() *gin.Engine {
 	r := gin.Default()
 	r.Use(cors.Default())
 
+	r.POST("/register", handlers.RegisterUserHandle)
+	r.POST("/login", handlers.LoginUserHandle)
+
 	r.GET("/project", handlers.GetAllProjectHandle)
 	r.GET("/project/select", handlers.GetByIdProjectHandle)
 	r.POST("/project/input", handlers.InsertProjectHandle)
