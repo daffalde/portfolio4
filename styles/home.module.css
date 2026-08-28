@@ -1,0 +1,74 @@
+.body {
+  width: 100%;
+  max-width: 1440px;
+  height: fit-content;
+  padding: 20px;
+}
+
+.hero {
+  width: 100%;
+  height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.navbarList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  border-radius: 100px;
+  padding: 5px;
+  padding-left: 20px;
+}
+.navbarList a {
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 400;
+}
+.navbarList a:hover {
+  text-decoration: underline;
+}
+
+.heroFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.heroFooter a {
+  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.heroFooter span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.heroContentProfil {
+  border-radius: 100%;
+  width: 100px;
+}
