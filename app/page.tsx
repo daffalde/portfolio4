@@ -5,6 +5,52 @@ import styles from "../styles/home.module.css";
 import Link from "next/link";
 
 export default function Home() {
+  const listSkill = [
+    {
+      image: "html",
+      name: "HTML5",
+    },
+    {
+      image: "css",
+      name: "css3",
+    },
+    {
+      image: "js",
+      name: "JavaScript",
+    },
+    {
+      image: "ts",
+      name: "TypeScript",
+    },
+    {
+      image: "react",
+      name: "React",
+    },
+    {
+      image: "next",
+      name: "NextJS",
+    },
+    {
+      image: "supabase",
+      name: "Supabase",
+    },
+    {
+      image: "figma",
+      name: "Figma",
+    },
+    {
+      image: "redux",
+      name: "Redux",
+    },
+    {
+      image: "git",
+      name: "GIT",
+    },
+    {
+      image: "docker",
+      name: "Docker",
+    },
+  ];
   return (
     <>
       <div className="homepage">
@@ -62,6 +108,30 @@ export default function Home() {
                 <h6>Check my resume</h6>
                 <img src="/homeLink.png" alt="link icon" width={16} />
               </Link>
+            </div>
+          </div>
+          <div id="skill" className={styles.skill}>
+            <h1>
+              Design and develop with a focus on
+              <span>clean code, responsive layouts, and user experiences</span>,
+              transforming ideas into <span>functional, elegant solutions</span>
+              that balance creativity with technical precision.
+            </h1>
+            <div className={`bg-template ${styles.skillList}`}>
+              {listSkill.map((e, i) => (
+                <>
+                  <div className={styles.skillItem}>
+                    <p className={`bg-template ${styles.skillName}`}>
+                      {e.name}
+                    </p>
+                    <img
+                      src={`/skill/${e.image}.png`}
+                      alt="skill icon"
+                      key={i}
+                    />
+                  </div>
+                </>
+              ))}
             </div>
           </div>
         </div>
