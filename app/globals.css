@@ -13,6 +13,9 @@
   --text-second: #404040;
   --red: hsl(0, 50%, 50%);
 }
+body {
+  scroll-behavior: smooth;
+}
 
 /* ______________________________________________________ */
 .homepage {

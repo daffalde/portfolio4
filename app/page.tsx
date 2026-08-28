@@ -112,26 +112,31 @@ export default function Home() {
           </div>
           <div id="skill" className={styles.skill}>
             <h1>
-              Design and develop with a focus on
+              Design and develop with a focus on{" "}
               <span>clean code, responsive layouts, and user experiences</span>,
-              transforming ideas into <span>functional, elegant solutions</span>
+              transforming ideas into <span>functional, elegant solutions</span>{" "}
               that balance creativity with technical precision.
             </h1>
             <div className={`bg-template ${styles.skillList}`}>
               {listSkill.map((e, i) => (
-                <>
-                  <div className={styles.skillItem}>
-                    <p className={`bg-template ${styles.skillName}`}>
-                      {e.name}
-                    </p>
-                    <img
-                      src={`/skill/${e.image}.png`}
-                      alt="skill icon"
-                      key={i}
-                    />
-                  </div>
-                </>
+                <div key={i} className={styles.skillItem}>
+                  <p className={`bg-template ${styles.skillName}`}>{e.name}</p>
+                  <img src={`/skill/${e.image}.png`} alt="skill icon" />
+                </div>
               ))}
+            </div>
+          </div>
+          <div id="project" className={styles.project}>
+            <span>
+              <h2>From Idea to Impact</h2>
+              <p>
+                A showcase of selected projects highlighting modern web
+                development, UI/UX design, and creative problem solving.
+              </p>
+            </span>
+            <div className={styles.projectImage}>
+              <img src="/mac-button.png" alt="mac traffic button" />
+              <img src="/projectImg.png" alt="main project image" />
             </div>
           </div>
         </div>
