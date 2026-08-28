@@ -139,6 +139,33 @@ export default function Home() {
               <img src="/projectImg.png" alt="main project image" />
             </div>
           </div>
+          <div className={styles.footer}>
+            <span>
+              <h3>daffalderayhan@gmail.com</h3>
+              <div className={styles.footerList}>
+                <Link href={"#home"}>Home</Link>
+                <h6>|</h6>
+                <Link href={"#skill"}>Skill</Link>
+                <h6>|</h6>
+                <Link href={"#project"}>Project</Link>
+                <h6>|</h6>
+                <Link href={"https://www.linkedin.com/in/daffa-alde/"}>
+                  Contact me
+                </Link>
+              </div>
+            </span>
+            <span>
+              <p>© 2026 Daffa Alde. All rights reserved.</p>
+              <div className={styles.footerList}>
+                <Link href={"https://www.linkedin.com/in/daffa-alde/"}>
+                  <img src="/linkedin.png" alt="Linkedin icon" />
+                </Link>
+                <Link href={"https://github.com/daffalde"}>
+                  <img src="/github.png" alt="github icon" />
+                </Link>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
     </>

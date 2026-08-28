@@ -154,3 +154,32 @@
   width: 100%;
   border-radius: 10px;
 }
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.footer span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footerList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.footerList a {
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+.footerList a:hover {
+  text-decoration: underline;
+}
