@@ -1,8 +1,0 @@
-.homeContent {
-  width: 100%;
-  height: fit-content;
-  min-height: 80dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
