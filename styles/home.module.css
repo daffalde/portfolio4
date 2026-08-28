@@ -136,6 +136,9 @@
   text-align: center;
   gap: 20px;
 }
+.project span {
+  width: 100%;
+}
 .projectImage {
   width: 100%;
   min-width: 800px;
