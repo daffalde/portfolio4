@@ -6,13 +6,11 @@ export function middleware(request: NextRequest) {
 
   if (!token) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
-  } else if (token && path == "/auth/login") {
-    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/auth/login", "/test", "/dashboard/home", "/dashboard/project"],
+  matcher: ["/test", "/dashboard/home", "/dashboard/project"],
 };
