@@ -7,6 +7,12 @@ export default function HomeDashboard() {
       <div className="homepage">
         <div className="dashboard">
           <DbNavbar />
+          <div className={styles.body}>
+            <h2>Dashboard</h2>
+            <div className={styles.content}>
+              <p className="p-second">No data available yet.</p>
+            </div>
+          </div>
         </div>
       </div>
     </>

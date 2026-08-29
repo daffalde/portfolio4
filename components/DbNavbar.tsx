@@ -18,7 +18,7 @@ export default function DbNavbar() {
     },
     {
       image: "link",
-      link: "/https://daffalde.site/",
+      link: "https://daffalde.site/",
     },
   ];
   return (
@@ -27,7 +27,13 @@ export default function DbNavbar() {
         <div className={styles.navigation}>
           {navigation.map((e, i) => (
             <button
-              onClick={() => router.push(e.link)}
+              onClick={() => {
+                if (e.image == "link") {
+                  window.open(e.link);
+                } else {
+                  router.push(e.link);
+                }
+              }}
               key={i}
               className={`${styles.item} ${path == e.link ? styles.itemSelected : null}`}
             >
