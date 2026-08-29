@@ -1,0 +1,26 @@
+.body {
+  width: 100%;
+  max-width: 1440px;
+  height: 100dvh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 15px;
+}
+.content span {
+  width: 100%;
+}
+.content button {
+  width: 100%;
+}

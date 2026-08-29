@@ -8,6 +8,7 @@
   --bg-main: #f2f2f2;
   --bg-second: hsla(0, 0%, 95%, 0.5);
   --bg-third: #bfbfbf;
+  --bg-fourth: #dadada;
   --border: #404040;
   --text-main: #1a1a1a;
   --text-second: #404040;
@@ -161,7 +162,7 @@ select {
   font-size: 16px;
   padding: 10px;
   border-radius: 5px;
-  background-color: var(--bg-third);
+  background-color: var(--bg-fourth);
   border: 1px solid transparent;
   width: 100%;
   resize: none;
