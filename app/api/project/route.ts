@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     const file = formData.get("file") as File;
     const id = crypto.randomUUID();
     const name = formData.get("name_project") as string;
-    const type = formData.get("type") as string;
     const desc = formData.get("description") as string;
     const link = formData.get("link") as string;
 
@@ -32,14 +31,14 @@ export async function POST(request: NextRequest) {
       .getPublicUrl(filePath);
 
     const { data: dbData, error: dbError } = await supabase
-      .from("posts")
+      .from("project")
       .insert([
         {
-          id: id,
-          type: type,
+          id_project: id,
+          user_id: "eb1b4707-c2a4-470b-913d-3b761aa660d4",
           name_project: name,
-          description: desc,
-          link: link,
+          desc_project: desc,
+          link_project: link,
           image_project: publicUrlData.publicUrl,
         },
       ])
