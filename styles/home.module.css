@@ -225,6 +225,11 @@
   text-decoration: underline;
 }
 
+@media (max-width: 1100px) {
+  .projectList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media (max-width: 850px) {
   .footer {
     gap: 10px;
@@ -238,6 +243,9 @@
   }
 }
 @media (max-width: 550px) {
+  .projectList {
+    grid-template-columns: 1fr;
+  }
   .navbarList {
     padding-left: 5px;
   }
