@@ -51,6 +51,33 @@ export default function Home() {
       name: "Docker",
     },
   ];
+
+  const listProject = [
+    {
+      image: "/project/komoku.png",
+      name: "Komoku - Machine Learning",
+      link: "https://komokuv2.vercel.app/",
+      desc: "Multi-layered machine learning to identify phishing URLs in real time.",
+    },
+    {
+      image: "/project/job.png",
+      name: "Compass Career - Machine Learning",
+      link: "https://compass-career.vercel.app/",
+      desc: "AI‑powered job portal for smarter career matching.",
+    },
+    {
+      image: "/project/work.png",
+      name: "Labor Omnia Vincit - Landing Page",
+      link: "https://daffalde.github.io/lof/",
+      desc: "Professional website development and digital solutions.",
+    },
+    {
+      image: "/project/pine.png",
+      name: "Hutan Pinus Pengger - Landing Page",
+      link: "https://bottleneck14.github.io/reactuts/",
+      desc: "Tourism site highlighting scenic pine forest attractions.",
+    },
+  ];
   return (
     <>
       <div className="homepage">
@@ -104,10 +131,6 @@ export default function Home() {
                   <h6>github</h6>
                 </Link>
               </span>
-              <Link href={"#"}>
-                <h6>Check my resume</h6>
-                <img src="/homeLink.png" alt="link icon" width={16} />
-              </Link>
             </div>
           </div>
           <div id="skill" className={styles.skill}>
@@ -137,6 +160,27 @@ export default function Home() {
             <div className={styles.projectImage}>
               <img src="/mac-button.png" alt="mac traffic button" />
               <img src="/projectImg.png" alt="main project image" />
+            </div>
+            <div className={styles.projectList}>
+              {listProject.map((e, i) => (
+                <div
+                  style={{
+                    backgroundImage: `url(${e.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  className={`bg-template ${styles.projectItem}`}
+                  key={i}
+                >
+                  <button onClick={() => window.open(e.link)}>
+                    <img width={"100%"} src="/homeLink.png" alt="link icon" />
+                  </button>
+                  <span>
+                    <h5>{e.name}</h5>
+                    <p className="p-second">{e.desc}</p>
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.footer}>

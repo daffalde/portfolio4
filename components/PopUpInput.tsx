@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { useState } from "react";
 
 interface PopUpFunc {
@@ -24,7 +23,6 @@ export default function PopUpInput({ close }: PopUpFunc) {
   };
 
   async function handleAdd() {
-    const cookiesStore = await cookies();
     try {
       const data = new FormData();
       if (file) data.append("file", file);

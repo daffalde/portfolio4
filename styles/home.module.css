@@ -159,6 +159,42 @@
   width: 100%;
   border-radius: 10px;
 }
+.projectList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.projectItem {
+  height: 380px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  padding: 20px;
+  text-align: left;
+  border-radius: 20px;
+  transition: 0.3s;
+  border: 3px solid var(--bg-main);
+  cursor: default;
+}
+.projectItem:hover {
+  transform: scale(1.03);
+  transition: 0.3s;
+}
+.projectItem button {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-main);
+  border-radius: 100%;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+}
 
 .footer {
   display: flex;
