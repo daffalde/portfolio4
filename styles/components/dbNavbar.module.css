@@ -1,0 +1,36 @@
+.body {
+  width: fit-content;
+  height: 100dvh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.navigation {
+  background-color: var(--text-main);
+  border: 1px solid var(--text-second);
+  border-radius: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+.item {
+  width: 65px;
+  height: 65px;
+  border-radius: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 20px;
+}
+.item:hover {
+  background-color: var(--text-second);
+}
+.itemSelected {
+  background-color: var(--text-second);
+}
+.item img {
+  width: 100%;
+}
