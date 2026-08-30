@@ -3,7 +3,16 @@
 import { Analytics } from "@vercel/analytics/next";
 import styles from "../styles/home.module.css";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
+interface ProjectData {
+  id_project: string;
+  image_project: string;
+  name_project: string;
+  desc_project: string;
+  link_project: string;
+  created_at: string;
+}
 export default function Home() {
   const listSkill = [
     {
@@ -52,32 +61,29 @@ export default function Home() {
     },
   ];
 
-  const listProject = [
-    {
-      image: "/project/komoku.png",
-      name: "Komoku - Machine Learning",
-      link: "https://komokuv2.vercel.app/",
-      desc: "Multi-layered machine learning to identify phishing URLs in real time.",
-    },
-    {
-      image: "/project/job.png",
-      name: "Compass Career - Machine Learning",
-      link: "https://compass-career.vercel.app/",
-      desc: "AI‑powered job portal for smarter career matching.",
-    },
-    {
-      image: "/project/work.png",
-      name: "Labor Omnia Vincit - Landing Page",
-      link: "https://daffalde.github.io/lof/",
-      desc: "Professional website development and digital solutions.",
-    },
-    {
-      image: "/project/pine.png",
-      name: "Hutan Pinus Pengger - Landing Page",
-      link: "https://bottleneck14.github.io/reactuts/",
-      desc: "Tourism site highlighting scenic pine forest attractions.",
-    },
-  ];
+  const [data, setData] = useState<ProjectData[] | null>([]);
+
+  useEffect(() => {
+    async function handleData() {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/project`,
+          {
+            method: "GET",
+            headers: {
+              apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+            },
+          },
+        );
+        const response = await res.json();
+        console.log(response);
+        setData(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    handleData();
+  }, []);
   return (
     <>
       <div className="homepage">
@@ -162,25 +168,37 @@ export default function Home() {
               <img src="/projectImg.png" alt="main project image" />
             </div>
             <div className={styles.projectList}>
-              {listProject.map((e, i) => (
-                <div
-                  style={{
-                    backgroundImage: `url(${e.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                  className={`bg-template ${styles.projectItem}`}
-                  key={i}
-                >
-                  <button onClick={() => window.open(e.link)}>
-                    <img width={"100%"} src="/homeLink.png" alt="link icon" />
-                  </button>
-                  <span>
-                    <h5>{e.name}</h5>
-                    <p className="p-second">{e.desc}</p>
-                  </span>
-                </div>
-              ))}
+              {data
+                ? data
+                    .sort(
+                      (a, b) =>
+                        new Date(b.created_at).getTime() -
+                        new Date(a.created_at).getTime(),
+                    )
+                    .map((e, i) => (
+                      <div
+                        style={{
+                          backgroundImage: `url(${e.image_project})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "left",
+                        }}
+                        className={`bg-template ${styles.projectItem}`}
+                        key={i}
+                      >
+                        <button onClick={() => window.open(e.link_project)}>
+                          <img
+                            width={"100%"}
+                            src="/homeLink.png"
+                            alt="link icon"
+                          />
+                        </button>
+                        <span>
+                          <h5>{e.name_project}</h5>
+                          <p className="p-second">{e.desc_project}</p>
+                        </span>
+                      </div>
+                    ))
+                : null}
             </div>
           </div>
           <div className={styles.footer}>
