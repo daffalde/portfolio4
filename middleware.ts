@@ -7,6 +7,10 @@ export function middleware(request: NextRequest) {
   if (!token && request.nextUrl.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
+
+  if (token && request.nextUrl.pathname.startsWith("/auth")) {
+    return NextResponse.redirect(new URL("/dashboard/home", request.url));
+  }
 }
 
 export const config = {
