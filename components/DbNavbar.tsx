@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import styles from "../styles/components/dbNavbar.module.css";
 import { useRouter } from "next/navigation";
+import { hanldeLogout } from "@/lib/logout";
 
 export default function DbNavbar() {
   const path = usePathname();
@@ -21,6 +22,16 @@ export default function DbNavbar() {
       link: "https://daffalde.site/",
     },
   ];
+  // async function handleLogout() {
+  //   try {
+  //     await fetch("/api/auth/logout", {
+  //       method: "POST",
+  //     });
+  //     console.log("data dihapus");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
   return (
     <>
       <div className={styles.body}>
@@ -42,7 +53,13 @@ export default function DbNavbar() {
           ))}
         </div>
         <div className={styles.navigation}>
-          <button className={`${styles.item} `}>
+          <button
+            onClick={() => {
+              hanldeLogout();
+              router.push("/auth/login");
+            }}
+            className={`${styles.item} `}
+          >
             <img src={`/logout.png`} alt="navigation icon" />
           </button>
         </div>

@@ -3,20 +3,25 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const cookieStore = await cookies();
-  const token = cookieStore.get("sb-access-token")?.value;
+  const token = cookieStore.get("access-token")?.value;
 
   if (token) {
-    await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/logout`, {
-      method: "POST",
-      headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/logout`, {
+        method: "POST",
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (err) {
+      console.error("Gagal melakukan revoke token di Supabase:", err);
+    }
   }
 
-  cookieStore.delete("sb-access-token");
-  cookieStore.delete("sb-refresh-token");
+  const response = NextResponse.json({ message: "Logout berhasil" });
 
-  return NextResponse.json({ message: "Logout berhasil" });
+  response.cookies.delete("access-token");
+
+  return response;
 }
