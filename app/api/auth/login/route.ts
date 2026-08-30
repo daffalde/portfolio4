@@ -3,14 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    const body = await request.json();
+    const { email, password } = body;
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/token?grant_type=password`,
       {
         method: "POST",
         headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          "Content-Type": "application/json",
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
         },
         body: JSON.stringify({ email, password }),
       },
@@ -20,37 +22,36 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       return NextResponse.json({
-        error: "Login gagal",
+        message: "Login Gagal",
+        error: res.status,
       });
     }
 
-    const { access_token, refresh_token, expires_in } = data;
+    const { access_token, expire_in, user } = data;
 
     const cookieStore = await cookies();
 
-    cookieStore.set("sb-access-token", access_token, {
+    cookieStore.set("access_token", access_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       sameSite: "lax",
       path: "/",
-      maxAge: expires_in,
-    });
-
-    cookieStore.set("sb-refresh-token", access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24,
+      maxAge: expire_in || 3600,
     });
 
     return NextResponse.json({
-      message: "Login berhasil",
-      user: data.user,
+      success: true,
+      user,
     });
-  } catch (err) {
+  } catch (err: any) {
+    // Log error tak terduga (misal: JSON parse error atau Network Error) ke Terminal
+    console.error("Fatal Catch Error in Login Route:", err);
+
     return NextResponse.json(
-      { message: "Terjadi kesalahan pada server" },
+      {
+        message: "Terjadi kesalahan pada server",
+        error_detail: err?.message || String(err),
+      },
       { status: 500 },
     );
   }
