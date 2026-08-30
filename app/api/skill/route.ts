@@ -83,3 +83,54 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("access_token")?.value;
+
+    const body = await request.json();
+    const { id_project } = body;
+
+    // 1. Validasi keberadaan id_project
+    if (!id_project) {
+      return NextResponse.json(
+        { error: "id_project wajib diisi." },
+        { status: 400 },
+      );
+    }
+
+    // 2. Eksekusi DELETE ke Supabase REST API
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/project?id_project=eq.${id_project}`,
+      {
+        method: "DELETE",
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    // 3. Cek apakah HTTP response dari Supabase berhasil (2xx)
+    if (!res.ok) {
+      const errorData = await res.json();
+      return NextResponse.json(
+        { error: errorData.message || "Gagal menghapus data dari database." },
+        { status: res.status },
+      );
+    }
+
+    return NextResponse.json({
+      message: "Data berhasil dihapus",
+    });
+  } catch (err: any) {
+    console.error("DELETE API Error:", err);
+    // 4. Pastikan blok catch mengembalikan response error 500
+    return NextResponse.json(
+      { error: err.message || "Internal Server Error" },
+      { status: 500 },
+    );
+  }
+}

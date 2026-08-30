@@ -35,7 +35,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
-.item span button {
+.item span button:first-child {
   width: 100%;
 }

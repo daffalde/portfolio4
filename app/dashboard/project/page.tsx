@@ -40,6 +40,29 @@ export default function ProjectDashboard() {
     }
     getData();
   }, []);
+
+  const handleDelete = async (id_project: string) => {
+    try {
+      const res = await fetch("/api/skill", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id_project }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        alert(`Gagal: ${result.error}`);
+        return;
+      }
+
+      window.location.reload();
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  };
   return (
     <>
       {popUp ? <PopUpInput close={handleClose} /> : null}
@@ -75,6 +98,12 @@ export default function ProjectDashboard() {
                         className="btn-main"
                       >
                         Visit website
+                      </button>
+                      <button
+                        onClick={() => handleDelete(e.id_project)}
+                        className="btn-second"
+                      >
+                        <img src="/delete.png" alt="delete icon" />
                       </button>
                     </span>
                   </div>
