@@ -13,3 +13,28 @@
   justify-content: space-between;
   align-items: center;
 }
+.content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 20px;
+  gap: 5px;
+}
+.item span {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item span button {
+  width: 100%;
+}
