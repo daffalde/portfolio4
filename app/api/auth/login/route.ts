@@ -44,7 +44,6 @@ export async function POST(request: Request) {
       user,
     });
   } catch (err: any) {
-    // Log error tak terduga (misal: JSON parse error atau Network Error) ke Terminal
     console.error("Fatal Catch Error in Login Route:", err);
 
     return NextResponse.json(
