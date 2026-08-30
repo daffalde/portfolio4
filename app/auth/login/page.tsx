@@ -5,7 +5,6 @@ import styles from "../../../styles/auth/login.module.css";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +21,10 @@ export default function LoginPage() {
       console.log("login error");
       return;
     }
-    router.push("/dashboard/home");
+
+    const data = await res.json();
+
+    console.log(data);
   }
   return (
     <>

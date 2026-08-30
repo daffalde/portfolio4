@@ -6,13 +6,13 @@ interface PopUpFunc {
 
 export default function PopUpInput({ close }: PopUpFunc) {
   const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     link: "",
     desc: "",
   });
 
-  // handler untuk input text/textarea
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -23,6 +23,7 @@ export default function PopUpInput({ close }: PopUpFunc) {
   };
 
   async function handleAdd() {
+    setLoading(true);
     try {
       const data = new FormData();
       if (file) data.append("file", file);
@@ -30,21 +31,26 @@ export default function PopUpInput({ close }: PopUpFunc) {
       data.append("link", formData.link);
       data.append("desc", formData.desc);
 
-      const res = await fetch("/api/project", {
+      // Cukup kirim FormData tanpa menyertakan header apikey manual
+      const res = await fetch("/api/skill", {
         method: "POST",
-        headers: {
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        },
         body: data,
       });
 
       const result = await res.json();
-      console.log("Response:", result);
 
-      // tutup popup setelah sukses
-      close();
+      if (!res.ok) {
+        alert(`Gagal: ${result.error || "Terjadi kesalahan"}`);
+        return;
+      }
+
+      console.log("Response:", result);
+      window.location.reload();
     } catch (err) {
       console.error("Error:", err);
+      alert("Terjadi kesalahan koneksi.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -58,11 +64,11 @@ export default function PopUpInput({ close }: PopUpFunc) {
           </button>
         </div>
 
-        {/* ______________________________________________ */}
         <div className="popUpInput-add">
           <input
             type="file"
             onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            disabled={loading}
           />
           <input
             type="text"
@@ -70,6 +76,7 @@ export default function PopUpInput({ close }: PopUpFunc) {
             placeholder="Name"
             value={formData.name}
             onChange={handleChange}
+            disabled={loading}
           />
           <input
             type="text"
@@ -77,21 +84,27 @@ export default function PopUpInput({ close }: PopUpFunc) {
             placeholder="Link"
             value={formData.link}
             onChange={handleChange}
+            disabled={loading}
           />
           <textarea
             name="desc"
             placeholder="desc"
             value={formData.desc}
             onChange={handleChange}
+            disabled={loading}
           />
         </div>
 
-        {/* ______________________________________________ */}
         <div className="popUpInput-action">
-          <button onClick={close} className="btn-second">
+          <button onClick={close} className="btn-second" disabled={loading}>
             Cancel
           </button>
-          <button onClick={handleAdd} className="btn-main">
+          <button
+            onClick={handleAdd}
+            className={`btn-main ${loading ? "btn-disable" : null}`}
+            disabled={loading}
+          >
+            {loading ? <img src="/loading.gif" alt="loading icon" /> : null}
             Add
           </button>
         </div>
