@@ -7,9 +7,13 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [peekPass, setPeekPass] = useState(true);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(e: any) {
     e.preventDefault();
+    setLoading(true);
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -19,12 +23,14 @@ export default function LoginPage() {
 
     if (!res.ok) {
       console.log("login error");
+      setLoading(false);
       return;
     }
 
     const data = await res.json();
 
     console.log(data);
+    router.push("/dashboard/home");
   }
   return (
     <>
@@ -43,14 +49,26 @@ export default function LoginPage() {
             </span>
             <span>
               <p>Password</p>
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                placeholder="********"
-              />
+              <div>
+                <input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type={`${peekPass ? "password" : "text"}`}
+                  placeholder="********"
+                />
+                <img
+                  width={"25px"}
+                  src={`${peekPass ? "/eye-open.png" : "/eye-close.png"}`}
+                  alt="peek password icon"
+                  onClick={() => setPeekPass(!peekPass)}
+                />
+              </div>
             </span>
-            <button onClick={handleLogin} className="btn-main">
+            <button
+              onClick={handleLogin}
+              className={`btn-main ${loading ? ".btn-disable" : null}`}
+            >
+              {loading ? <img src="/loading.gif" alt="loading icon" /> : null}
               Sign In
             </button>
           </div>
