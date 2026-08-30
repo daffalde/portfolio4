@@ -43,7 +43,7 @@ export default function ProjectDashboard() {
 
   const handleDelete = async (id_project: string) => {
     try {
-      const res = await fetch("/api/skill", {
+      const res = await fetch("/api/project", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

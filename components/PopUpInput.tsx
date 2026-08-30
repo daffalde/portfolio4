@@ -31,8 +31,7 @@ export default function PopUpInput({ close }: PopUpFunc) {
       data.append("link", formData.link);
       data.append("desc", formData.desc);
 
-      // Cukup kirim FormData tanpa menyertakan header apikey manual
-      const res = await fetch("/api/skill", {
+      const res = await fetch("/api/project", {
         method: "POST",
         body: data,
       });
