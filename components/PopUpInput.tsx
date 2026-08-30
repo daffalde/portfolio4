@@ -45,7 +45,7 @@ export default function PopUpInput({ close }: PopUpFunc) {
       }
 
       console.log("Response:", result);
-      close();
+      window.location.reload();
     } catch (err) {
       console.error("Error:", err);
       alert("Terjadi kesalahan koneksi.");
@@ -99,8 +99,13 @@ export default function PopUpInput({ close }: PopUpFunc) {
           <button onClick={close} className="btn-second" disabled={loading}>
             Cancel
           </button>
-          <button onClick={handleAdd} className="btn-main" disabled={loading}>
-            {loading ? "Adding..." : "Add"}
+          <button
+            onClick={handleAdd}
+            className={`btn-main ${loading ? "btn-disable" : null}`}
+            disabled={loading}
+          >
+            {loading ? <img src="/loading.gif" alt="loading icon" /> : null}
+            Add
           </button>
         </div>
       </div>
