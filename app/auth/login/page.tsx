@@ -10,27 +10,40 @@ export default function LoginPage() {
   const [peekPass, setPeekPass] = useState(true);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   async function handleLogin(e: any) {
     e.preventDefault();
     setLoading(true);
+    setError(false);
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!res.ok) {
-      console.log("login error");
+      if (!res.ok) {
+        console.log("login error");
+        setLoading(false);
+        return;
+      }
+
+      const data = await res.json();
+
+      if (data.error) {
+        setLoading(false);
+        setError(true);
+        return;
+      }
+
+      console.log(data);
+      router.push("/dashboard/home");
       setLoading(false);
-      return;
+    } catch (err) {
+      console.log(err);
     }
-
-    const data = await res.json();
-
-    console.log(data);
-    router.push("/dashboard/home");
   }
   return (
     <>
@@ -41,6 +54,7 @@ export default function LoginPage() {
             <span>
               <p>Email</p>
               <input
+                className={`${error ? "input-warning" : null}`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="text"
@@ -51,6 +65,7 @@ export default function LoginPage() {
               <p>Password</p>
               <div>
                 <input
+                  className={`${error ? "input-warning" : null}`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type={`${peekPass ? "password" : "text"}`}
@@ -64,6 +79,9 @@ export default function LoginPage() {
                 />
               </div>
             </span>
+            {error ? (
+              <p className="p-error">Incorrect email or password</p>
+            ) : null}
             <button
               onClick={handleLogin}
               className={`btn-main ${loading ? ".btn-disable" : null}`}
